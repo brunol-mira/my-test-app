@@ -16,12 +16,14 @@
       </v-btn>
     </v-app-bar>
     <v-main>
-      <!--  Router Module -->
-      <router-view></router-view>
+      <v-container >
+        <!--  Router Module -->
+        <router-view></router-view>
+      </v-container>
     </v-main>
-    <v-main>
-      <!--  Main Module -->
-    </v-main>
+<!--    <v-main>-->
+<!--      &lt;!&ndash;  Main Module &ndash;&gt;-->
+<!--    </v-main>-->
     <!-- footer -->
     <v-footer
         color="primary lighten-1"
@@ -81,7 +83,11 @@ export default {
         {
           label: 'Dashboard',
           url: '/dashboard'
-        }
+        },
+        {
+          label: 'Listing',
+          url: '/employees'
+        },
       ]
     }
   }
