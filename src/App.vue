@@ -15,10 +15,10 @@
         {{ link.label }}
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <!--  Router Module -->
       <router-view></router-view>
-    </v-content>
+    </v-main>
     <v-main>
       <!--  Main Module -->
     </v-main>
