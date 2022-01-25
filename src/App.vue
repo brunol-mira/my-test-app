@@ -14,6 +14,18 @@
       >
         {{ link.label }}
       </v-btn>
+
+      <v-btn @click="toggleTheme" text rounded>Toggle Theme</v-btn>
+
+<!--      <v-container-->
+<!--          class="px-0"-->
+<!--          fluid-->
+<!--      >-->
+<!--        <v-switch-->
+<!--            @click="toggleTheme"-->
+<!--        ></v-switch>-->
+<!--      </v-container>-->
+
     </v-app-bar>
     <v-main>
       <v-container >
@@ -90,6 +102,13 @@ export default {
         },
       ]
     }
+  },
+
+  methods: {
+    toggleTheme() {
+      this.$vuetify.theme.themes.dark.anchor = '#41B883'
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    },
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <h1>Dashboard</h1>
 
     <v-row>
@@ -9,18 +9,42 @@
     </v-row>
 
     <v-row>
-      <v-col v-for="statistic in statistics"
-             :key="`${statistic.title}`" cols="12" md="6" lg="3">
-        <StatisticCard :statistic="statistic"/>
+      <v-col
+          v-for="statistic in statistics"
+          :key="`${statistic.title}`"
+          cols="12"
+          md="6"
+          lg="3"
+      >
+        <StatisticCard :statistic="statistic" />
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="12" sm="7" md="8" lg="8">
+      <v-col cols="12" md="8">
         <EmployeesTable :employees="employees" @select-employee="setEmployee" />
       </v-col>
-      <v-col cols="12" sm="5" md="4" lg="4">
+      <v-col cols="12" md="4">
         <EventTimeline :timeline="timeline" />
+      </v-col>
+    </v-row>
+
+    <v-row id="below-the-fold" v-intersect="showMoreContent">
+      <v-col cols="12" md="8">
+        <EmployeesTable :employees="employees" @select-employee="setEmployee" />
+      </v-col>
+      <v-col cols="12" md="4">
+        <EventTimeline :timeline="timeline" />
+      </v-col>
+    </v-row>
+
+    <v-row v-if="loadNewContent" id="more-content">
+      <v-col>
+        <v-skeleton-loader
+            ref="skeleton"
+            type="table"
+            class="mx-auto"
+        ></v-skeleton-loader>
       </v-col>
     </v-row>
 
@@ -31,7 +55,7 @@
         Close
       </v-btn>
     </v-snackbar>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -61,15 +85,33 @@ export default {
       },
       snackbar: false,
       statistics: statisticsData,
-      timeline: timelineData
+      timeline: timelineData,
+      loadNewContent: false,
     }
   },
   methods: {
     setEmployee(event) {
       this.snackbar = true
-      this.selectedEmployee.name = event.name
+      this.selectedEmployee.name  = event.name
       this.selectedEmployee.title = event.title
-    }
+    },
+    showMoreContent(entries) {
+
+      console.log(entries[0].isIntersecting);
+      // this.loadNewContent = entries[0].isIntersecting;
+
+      entries.forEach(entry => {
+        // chaque élément de entries correspond à une variation
+        // d'intersection pour un des éléments cible:
+        //   entry.boundingClientRect
+        //   entry.intersectionRatio
+        //   entry.intersectionRect
+        this.loadNewContent = entry.isIntersecting
+        //   entry.rootBounds
+        //   entry.target
+        //   entry.time
+      });
+    },
   }
 }
 </script>
