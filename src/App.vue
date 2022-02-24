@@ -100,6 +100,10 @@ export default {
           label: 'Listing',
           url: '/employees'
         },
+        {
+          label: 'Signup',
+          url: '/signup'
+        },
       ]
     }
   },

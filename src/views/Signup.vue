@@ -73,6 +73,22 @@
           ></v-color-picker>
         </v-row>
 
+        <v-row justify="center">
+
+<!--          <template>-->
+<!--            <verte picker="wheel" model="rgb"></verte>-->
+<!--          </template>-->
+        </v-row>
+
+<!--        <verte :picker="wheel" :model="rgb" display="widget"></verte>-->
+
+        <verte>
+          <svg viewBox="0 0 24 24">
+            <path d="M0 20h24v4H0z"/>
+            <path style="fill: #000" d="M11 3L5.5 17h2.25l1.12-3h6.25l1.12 3h2.25L13 3h-2zm-1.38 9L12 5.67 14.38 12H9.62z"/>
+          </svg>
+        </verte>
+
         <v-checkbox label="Agree to terms & condition" v-model="agreeToTerms" :rules="agreeToTermsRules" required></v-checkbox>
 
         <v-btn class="mr-4" type="submit" color="primary" :disabled="!formValidity">Submit</v-btn>
@@ -88,10 +104,15 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+// import Verte from './node_modules\verte\dist\verte.min.js';
+// import Verte from '../../node_modules/verte/dist/verte.js';
+import verte from 'verte';
 
 export default {
   name: 'SignPage',
-
+  components: {
+    verte
+  },
   data: () => ({
 
     agreeToTerms: false,
